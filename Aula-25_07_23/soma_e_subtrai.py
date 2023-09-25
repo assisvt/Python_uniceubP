@@ -1,4 +1,12 @@
 """
+- Construa o programa com as três funções: soma, subtrai e main
+(programa principal).
+
+A função soma recebe dois valores inteiros, realiza a soma e retorna
+o resultado do cálculo.
+
+A função subtrai recebe dois valores inteiros, realiza a subtração
+deles e retorna o resultado do cálculo.
 O programa (função main) lê dois valores inteiros digitados pelos
 usuários, chama a função soma passando os dois valores lidos e
 depois chama a função subtrai passando os dois valores lidos.
