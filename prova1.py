@@ -36,6 +36,13 @@ class Iphone():
             self.valor = novo_valor
         else:
             print('Iconsistência de valor.')
+    """ outro:
+    def set_valor(self, novo_valor):
+        if novo_valor > 0:
+            self.valor = novo_valor
+        else:
+            print('Inconsistência de valor')
+    """
     def aumenta_valor(self, valor_aumento):
         self.valor += valor_aumento
     def diminui_valor(self, valor_diminui):
