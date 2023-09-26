@@ -32,17 +32,10 @@ class Iphone():
     def get_valor(self):
         return self.valor
     def set_valor(self, novo_valor):
-        if type (novo_valor) in (int, float):
+        if type (novo_valor) in (int, float): # ou, mais simples: if novo_valor > 0:
             self.valor = novo_valor
         else:
-            print('Iconsistência de valor.')
-    """ outro:
-    def set_valor(self, novo_valor):
-        if novo_valor > 0:
-            self.valor = novo_valor
-        else:
-            print('Inconsistência de valor')
-    """
+            print('Iconsistência de valor.')  
     def aumenta_valor(self, valor_aumento):
         self.valor += valor_aumento
     def diminui_valor(self, valor_diminui):
