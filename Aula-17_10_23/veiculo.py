@@ -1,8 +1,4 @@
-"""                 Comentários de várias linhas.
-
-  CEUB  -  FATECS  -  BCC  -  ADS  -  Programação  -  Prof. Barbosa
-ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
-
+"""         
 - Com base nos conceitos de POO (Programação Orientada a Objetos) e
 inheritance (herança), implemente a entidade veículo com as
 especializações de carro e moto.
