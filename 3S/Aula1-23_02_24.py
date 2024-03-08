@@ -32,59 +32,60 @@ class Livro(object):
     qtd_titulo = 0
     @classmethod
     def get_qtd_titulo(cls):
-        return cls.qtd_titulo
+      return cls.qtd_titulo
     
     def __init__(self, titulo, autor, paginas, preco=0.0):
-        self.titulo = titulo
-        self.autor = autor
-        self.paginas = paginas
-        self.preco = preco
+      self.titulo = titulo
+      self.autor = autor
+      self.paginas = paginas
+      self.preco = preco
 
     def get_titulo(self):
-        return self.titulo
+      return self.titulo
     
     def get_preco(self):
-        return self.preco
+      return self.preco
     
     def set_titulo(self, novo_titulo):
-        if type(novo_titulo) == str:
+      if type(novo_titulo) == str:
             self.titulo = novo_titulo
-        else:
-            print('Erro: nome deve ser string.')
+      else:
+          print('Erro: nome deve ser string.')
     def aumenta_preco(self, preco_aumento):
-        self.preco = self.preco + preco_aumento
+      self.preco = self.preco + preco_aumento
 
-    def mostra_dados(self):
-        print('- Título:', self.titulo)
-        print('Autor:', self.autor)
-        print('Páginas:', self.paginas)
-        print('Preço:', self.preco)
+    def mostra_dados(self): # Mostra atributos
+      print('- Título:', self.titulo)
+      print('Autor:', self.autor)
+      print('Páginas:', self.paginas)
+      print('Preço:', self.preco)
     
     def aumento_pct(self, pct):
-        self.preco = self.preco + self.preco * pct/100
+      self.preco = self.preco + self.preco * pct/100
+      print(f'Novo valor do livro é {self.preco} reais.')
 
     def __str__(self):
         s = f'{self.titulo}, {self.autor}, {self.paginas}, {self.preco}'
         return s
     
-    
-
 if __name__ == '__main__':
-    livro1 = Livro('Harry Potter', 'J.K. Rowling', 210, 41.42)
-    print(livro1)
-    livro2 = Livro('Torto Arad', 'Lygia Fagundes Telles', 190)
-    print(livro2)
-    retorno = livro1.get_titulo()
-    print('Titulo:', retorno)
-    livro1.set_titulo('Harry Potter e a Pedra filosofal')
-    print('Novo título:', livro1.get_titulo())
-    livro1.set_titulo(8)
-    livro1.aumenta_preco(10)
-    print('Novo preço Livro 1:', livro1.get_preco())
-    livro2.set_titulo('Torto Arado')
-    print('Novo título Livro 2:', livro2.get_titulo())
-    livro2.aumenta_preco(100)
-    print('Novo preço livro 2:', livro2.get_preco())
-    livro1.mostra_dados()
+  livro1 = Livro('Harry Potter', 'J.K. Rowling', 210, 41.42)
+  print(livro1)
+  livro2 = Livro('Torto Arad', 'Lygia Fagundes Telles', 190)
+  print(livro2)
+  retorno = livro1.get_titulo()
+  print('Titulo:', retorno)
+  livro1.set_titulo('Harry Potter e a Pedra filosofal')
+  print('Novo título:', livro1.get_titulo())
+  livro1.set_titulo(8)
+  livro1.aumenta_preco(10)
+  print('Novo preço Livro 1:', livro1.get_preco())
+  livro2.set_titulo('Torto Arado')
+  print('Novo título Livro 2:', livro2.get_titulo())
+  livro2.aumenta_preco(100)
+  print('Novo preço livro 2:', livro2.get_preco())
+  livro1.mostra_dados()
+  livro1.aumento_pct(10)
+    print('Preço:', livro1.get_preco())
    
     
