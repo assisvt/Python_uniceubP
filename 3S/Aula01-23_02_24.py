@@ -86,6 +86,6 @@ if __name__ == '__main__':
   print('Novo preço livro 2:', livro2.get_preco())
   livro1.mostra_dados()
   livro1.aumento_pct(10)
-    print('Preço:', livro1.get_preco())
+  print('Preço:', livro1.get_preco())
    
     
