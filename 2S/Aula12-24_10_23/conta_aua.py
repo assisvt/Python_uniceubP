@@ -1,116 +1,144 @@
-# O nome de classe começa com letra maiúscula e as outras letras minúsculas.
-# class Conta:
-# class Conta():
-class Conta(object):                    # Superclasse
-    def __init__(self, nome, saldo=0.0):  # Construtor  com default
-        self.nome = nome                # Atributos de instância (objeto)
-        self.saldo = saldo
-    def get_nome(self):                 # Consulta
+############### AGREGAÇÃO ####################
+"""  CEUB  -  Bacharelado em Ciência da Computação (BCC)  -  Prof. Barbosa
+ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
+
+- Neste exercício, não vamos usar herança e nem classe abstrata (ABC).
+
+- Vamos implementar a classe conta corrente.
+
+- Primeira ideia dos atributos da classe ccnta corrente:
+
+número da conta;
+nome do titular;
+sobrenome do titular;
+cpf do titular;
+saldo da conta; e
+vl_limite da conta.
+
+Obs.: o valor limite é um valor que o banco disponibiliza e o titular pode usar.
+
+- Ideia de agregação:
+
+. Estamos como muitos atributos e uma conta corrente não tem os atributos:
+nome, sobrenome e cpf.
+. Pois, esses atributos são do titular e não da conta corrente.
+. Assim, crie uma nova classe (classe Titular) e faça uma agregação, ou seja,
+agrege um objeto da classe Titular a uma conta corrente.
+. Portanto, a classe Conta tem um  objeto da classe Titular.
+. Os atributos de Conta também podem ser referência (objeto) para outra classe
+
+- Vamos usar agregação na implementação:
+Crie a classe Titular com os atributos:
+nome do titular;
+sobrenome do titular;
+cpf do titular.
+
+Crie a classe Conta com os atributos:
+número da conta;
+obj_titular;
+saldo; e
+vl_limite.
+
+- Resumo:
+Um atributo de uma classe pode ser um objeto de outra classe.
+- Exemplo:
+O atributo obj_titular da classe Conta é um objeto da classe Titular.
+
+- Valor default na classe Conta:
+Na declaração dos parâmetros no construtor da classe Conta, atribua um
+valor default (padrão) de 1000.00 reais para o parâmetro valor limite.
+
+- Implemente:
+ 1- Crie a classe Titular com os atributos cpf, nome, sobrenome
+ 2- Crie alguns métodos gets e sets
+ 3- Crie (instancie) um objeto da classe Titular
+ 4- Crie o método funcional que retora o nome completo do titular, teste
+ 5- Crie a classe Conta com os atributos numero, obj_titular, saldo, limite.
+ 6- Crie alguns métodos gets e sets
+ 7- Crie um objeto da classe Conta usando o objeto da classe Titular criado
+ 8- No main, mostre o endereço do objeto titular criado
+ 9- No main, mostre o endereço do objeto conta criado
+10- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Titular
+11- Altere o nome do objeto titular, teste.
+12- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Conta.
+13- Altere o nome do objeto titular usando o objeto da classe Conta, teste.
+
+14- Crie o método extrato reduzido para mostrar os seguintes dados:
+    número da conta e saldo da conta
+15- Crie o método extrato normal para mostrar os seguintes dados:
+    nome, sobrenome, cpf, número da conta e saldo da conta
+16- Na classe Conta, crie o método parar mostrar todos os dados do atributo
+    titular da classe Conta.
+
+17- Faça um depósito, teste.
+18- Faça um saque, teste.
+19- Refaça o método anterior com uma RN (regra de negócio) do banco,
+    ou seja, com crítica.
+20- Cadastre mais uma conta corrente, teste
+21- Faça uma transferência, teste.
+22- Use sua criatividade, elabore o enunciado e implemente mais uma método
+    funcional neste sistema.
+"""
+class Titular(object):
+    def __init__(self, cpf, nome, sobrenome):
+        self.cpf = cpf
+        self.nome = nome
+        self.sobrenome = sobrenome
+    def get_cpf(self):
+        return self.cpf
+    def get_nome(self):
         return self.nome
-    def set_nome(self, novo_nome):      # Altera
+    def set_nome(self, novo_nome):
         self.nome = novo_nome
+    def get_sobrenome(self):
+        return self.sobrenome
+    def nome_completo(self): # Método fucional
+        nome_c = self.nome + " " + self.sobrenome # Usa concatenação de strings
+        # nome_c = f'{self.nome} {self.sobrenome}' # Usa f-string
+        # As duas linhas acima são equivalentes
+        return nome_c
+class Conta(object): # class Conta:
+    def __init__(self, numero, obj_titular, saldo, limite=1000.0):
+        self.numero = numero
+        self.titular = obj_titular
+        # O atributo self.titular recebe o endereço objeto da classe Titular
+        self.saldo = saldo
+        self.limite = limite
     def get_saldo(self):
         return self.saldo
-    def __str__(self):                  # Sobrescreve o método __str__ do Python
-        # s = 'Nome: ' + self.nome + ', R$ ' + str(self.saldo)  # Concatenação
-        s = f'Nome: {self.nome}, R$ {self.saldo}'               # f-string
-        return s
+    def set_saldo(self, novo_saldo):
+        self.saldo = novo_saldo
+    def get_titular(self):
+        return self.titular
+    def get_titular_nome(self):
+        return self.titular.get_nome()
+    def extrato_reduzido(self):
+        print(f"Extrato 1:\nNúmero: {self.numero}, Saldo: {self.saldo}")
+    def extrato_normal(self):
+        print(f'Extrato 2:\nNome: {self.titular.get_nome()}')
+        f'{self.titular.get_sobrenome()} CPF: {self.titular.get_cpf()}'
+        print(f"\nNúmero : {self.numero}, Saldo: {self.saldo}")
     def deposito(self, valor):          # Métodos funcionais
-        self.saldo += valor             # self.saldo = self.saldo + valor
-    def retirada(self, valor):          # Sem RN (Regra de Negócio)
-        self.saldo -= valor             # self.saldo = self.saldo - valor
-    def retirada_rn(self, valor):       # RN obrigatória (natural do banco)
+        self.saldo += valor   
+    def saque(self, valor):          # Sem RN (Regra de Negócio)
+        self.saldo -= valor 
+    def saque_rn(self, valor):       # RN obrigatória (natural do banco)
         if valor > self.saldo:
             print('Saldo insuficiente.')
         else:
             self.saldo -= valor
+    def transfere_para(self, destino): # sem critica
+        valor = float(input("Valor da retirada:"))
+        self.saldo -= valor
+        destino.saldo += valor
 
-
-# O nome de classe começa com letra maiúscula e as outras letras minúsculas.
-# class NomeSubclasse(NomeSuperclasse):     # Sintaxe
-class Conta_PF(Conta):      # Subclasse Conta_PF herda da superclasse Conta
-    def __init__(self, nome, saldo=0.0, genero='m', cpf=''):  # Valores default
-        super().__init__(nome, saldo)   # Chama o construtor da superclasse
-        self.genero = genero
-        self.cpf = cpf
-    def get_genero(self):               # Consulta
-        return self.genero
-    def set_genero(self, novo_genero):  # Altera
-        self.genero = novo_genero
-    def get_cpf(self):
-        return self.cpf
-    def set_cpf(self, novo_cpf):
-        self.cpf = novo_cpf
-
-
-""" - As principais modalidades de PJ:
-1 - MEI (Microempreendedor Individual)
-2 - ME – Microempresa
-3 - EPP (Empresa de Pequeno Porte)
-4 - EI (Empresário Individual) 
-5 - EIRELI (Empresa Individual de Responsabilidade Limitada)
-6 - Sociedade Limitada – LTDA
-7 - Sociedade Anônima (SA)                                  """
-
-# O nome de classe começa com letra maiúscula e as outras letras minúsculas.
-# class NomeSubclasse(NomeSuperclasse):   # Sintaxe
-class Conta_PJ(Conta):  # Subclasse Conta_PJ que herda da superclasse Conta
-    def __init__(self, nome, saldo=0.0, modalidade='MEI', cnpj=''):  # Construtor
-        super().__init__(nome, saldo)       # Chama o construtor da superclasse
-        # super(Conta_PJ, self).__init__(nome, saldo)
-        # Conta.__init__(self, nome, saldo)
-        self.modalidade = modalidade
-        self.cnpj = cnpj
-    def get_modalidade(self):
-        return self.modalidade
-    def get_cnpj(self):
-        return self.cnpj
-    def set_cnpj(self, novo_cnpj):
-        self.cnpj = novo_cnpj
-
-
-if __name__ == '__main__':
-    c = Conta('Alice')                  # Chama o construtor da classe Conta
-    print(c)                            # print(c.__str__())
-    print('- Superclasse:\nNome:', c.get_nome())  # Métodos da superclasse
-    print('Saldo:', c.get_saldo())
-    c.set_nome('Emily')
-    print('Nome alterado:', c.get_nome())
-    print(c.__str__())                  # print(c)
-    pf1 = Conta_PF('Ana', 3000.0, 'f', '1234')  # Objeto da subclasse
-    print(pf1)                          # Chama o método __str__()
-    print('- Pessoa Física 1:\nNome:', pf1.get_nome())  # Método na superclasse
-    print("Saldo:", pf1.get_saldo())
-    pf2 = Conta_PF('Ailton', 7000.0)    # Objeto da subclasse Conta_PF
-    print(pf2)                          # Chama o método __str__()
-    print('- Pessoa Física 2:\nNome:', pf2.get_nome())  # Método na superclasse
-    print("Saldo:", pf2.get_saldo())
-    print('CPF:', pf2.get_cpf())        # Método da subclasse
-    pf2.set_cpf('123456789')            # Altera
-    print('CPF alterado:', pf2.get_cpf())  # Verifica alteração
-    print('Saída usando as funções vars e __dict__ do Python:')
-    print(vars(pf2))                    # Usa os métodos do Python
-    print(pf2.__dict__)
-    # {'nome': 'Ana', 'saldo': 3000.0, 'genero': 'm', 'cpf': ''}
-    pj1 = Conta_PJ('Café ABC', 15000.0)  # objeto (instância) da subclasse Conta_PJ
-    print(pj1)
-    print('- Pessoa Jurídica:\nNome:', pj1.get_nome())  # Método da superclasse
-    print("Saldo:", pj1.get_saldo())
-    print('CNPJ:', pj1.get_cnpj())                      # Método da subclasse
-    print(pj1)
-    print(vars(pj1))                                    # Usa os métodos do Python
-    print(pj1.__dict__)
-    pf1.deposito(11)                                    # Depósito
-    print("- Pessoa Física 1:\nSaldo:", pf1.get_saldo())  # Verifica alteração
-    pj1.deposito(22)
-    print("- Pessoa Jurídica 1:\nSaldo:", pj1.get_saldo())  # Verifica alteração
-    pf1.retirada(10)                                        # Retirada sem RN
-    print("- Pessoa Física 1:\nSaldo:", pf1.get_saldo())    # Verifica alteração
-    pj1.retirada(21)
-    print("- Pessoa Jurídica 1:\nSaldo:", pj1.get_saldo())  # Verifica alteração
-    pf1.retirada_rn(10)                                     # Retirada com RN
-    print("- Pessoa Física 1:\nSaldo:", pf1.get_saldo())    # Verifica alteração
-    pj1.retirada_rn(21)
-    print("- Pessoa Jurídica 1:\nSaldo:", pj1.get_saldo())  # Verifica alteração
-    pj1.retirada_rn(20000.0)                                # Retirada, msg erro
-    print('Saldo: ', pj1.get_saldo())                       # Verifica alteração
+if __name__ == '__main__':  # Atalho: mai <tab>
+    titular1 = Titular('038342045-09', 'Lia', 'Oliveira') # Objeto da classe Titular #3
+    print('Nome:', titular1.get_nome())
+    print('Nome completo:', titular1.nome_completo())
+    conta1 = Conta('123', titular1, 1200.0, 2000.0) 
+    titular2 = Titular('038343041-09', 'Lucas', 'Zaher')
+    conta2 = Conta('345', titular2, 200.0, 300.0)
+    print(titular1) #8
+    print(conta1) #9
+    conta1.transfere_para(conta2)
