@@ -78,7 +78,23 @@ valor default (padrão) de 1000.00 reais para o parâmetro valor limite.
 21- Faça uma transferência, teste.
 22- Use sua criatividade, elabore o enunciado e implemente mais uma método
     funcional neste sistema.
+
+---
+
+10- Na classe Conta, crie o método para consultar o nome do titular, teste
+11- Na classe Conta, crie o método para consultar o sobrenome do titular, teste
+12- Na classe Conta, crie o método para consultar o cpf do titular, teste
+---
+
+- Use o método __class__ no objeto titular
+- Use o método __class__.__name__ no objeto titular
+
+- Mostre os atributos do objeto titular com o método __dict__
+- Mostre os atributos do objeto titular com o método vars
+
 """
+
+
 class Titular(object):     # class Titular:
     def __init__(self, cpf, nome, sobrenome):
         self.cpf = cpf
@@ -98,6 +114,7 @@ class Titular(object):     # class Titular:
         # As duas linhas acima são equivalentes
         return nome_c
      
+
 class Conta(object): # class Conta:
     def __init__(self, numero, o_titular, saldo, limite=1000.0):
         self.numero = numero
@@ -155,8 +172,7 @@ class Conta(object): # class Conta:
             return True
          
 
-if __name__ == '__main__':  # Atalho: mai <tab>
-    if __name__ == '__main__':          # Atalho: mai <tab>
+if __name__ == '__main__':  # Atalho: mai <tab>    
     titular1 = Titular('371-1', 'Lia', 'Oliveira')  # Objeto da classe Titular # 3
     print('Nome:', titular1.get_nome())
     print('Nome completo:', titular1.nome_completo())
@@ -192,5 +208,4 @@ if __name__ == '__main__':  # Atalho: mai <tab>
     print('Nome completo:', titular2.nome_completo())
     conta2 = Conta('143-6', titular2, 900.00)
 
-    conta1.transfere_para(conta2)  # Transfere da conta1 para a onnta2
-
+    conta1.transfere_para(conta2)  # Transfere da conta1 para a conta2
