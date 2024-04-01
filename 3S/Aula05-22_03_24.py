@@ -128,14 +128,15 @@ class Conta(object): # class Conta:
         return vars(self.titular)
     def deposito(self, valor):          # Métodos funcionais
         self.saldo += valor   
-    # def saque(self, valor):             # Sem crítica
-    #     self.saldo -= valor
+  # def saque(self, valor):             # Sem crítica
+  #     self.saldo -= valor
     def saque(self, valor):             # Com crítica (RN - Regra de Negócio)
         if self.saldo + self.limite < valor:
             print('Saldo insuficiente.')
             return False
         else:
             self.saldo -= valor
+         # self.saldo = self.saldo - valor
             print('Saque realizado.')
             return True
     # def transfere_para(self, destino):  # Sem crítica
@@ -152,12 +153,44 @@ class Conta(object): # class Conta:
             destino.deposito(valor)
             print('Transferência realizada com sucesso')
             return True
-
+         
 
 if __name__ == '__main__':  # Atalho: mai <tab>
-    titular1 = Titular('038342045-09', 'Lia', 'Oliveira') # Objeto da classe Titular #3
+    if __name__ == '__main__':          # Atalho: mai <tab>
+    titular1 = Titular('371-1', 'Lia', 'Oliveira')  # Objeto da classe Titular # 3
     print('Nome:', titular1.get_nome())
     print('Nome completo:', titular1.nome_completo())
-    conta1 = Conta('123456789-07', titular1, 1200.0, 2000.0) 
-    print(titular1) #8
-    print(conta1) #9
+    # Cria objeto da classe Conta usando o objeto da classe Titular
+    conta1 = Conta('123-4', titular1, 1200.00, 2000.00)
+    print(titular1)  # <conta_agregacao.Titular object at 0x000002B9DBA4AFD0> #8
+    print(conta1)    # <conta_agregacao.Conta object at 0x000002B9DBA4AF70>  #9
+    print(conta1.get_titular())         # Retorna o endereço do objeto titular
+    # <conta_agregacao.Titular object at 0x000002B9DBA4AFD0>, endereço do atributo
+    print('Nome:', titular1.get_nome())  # Consulta usando a classe Titular
+    print('Sobrenome:', titular1.get_sobrenome())
+    print('CPF:', titular1.get_cpf())
+    titular1.set_nome('Ana')            # Altera o nome usando a classe Titular
+    print('Nome:', titular1.get_nome())
+    print('Nome completo:', titular1.nome_completo())
+    print('Nome:', conta1.get_titular_nome())  # Consulta usando a classe Conta
+    print('Sobrenome:', conta1.get_titular_sobrenome())
+    print('CPF:', conta1.get_titular_cpf())
+    conta1.set_titular_nome('Alice')        # Altera o nome usando a classe Conta
+    print('Nome:', conta1.get_titular_nome())
+    conta1.extrato_reduzido()
+    conta1.extrato_normal()
+    print('conta1.dados_titular():', conta1.dados_titular())
+    print(conta1.get_titular())         # Retorna o endereço
+    conta1_titular = conta1.get_titular()
+    print(conta1_titular.__dict__)
+    print(vars(conta1_titular))
+    print("----------------")
+    conta1.deposito(200)
+    conta1.saque(100)
+    titular2 = Titular('388-1', 'Paulo', 'Pereira')  # Objeto da classe Titular
+    print('Nome:', titular2.get_nome())
+    print('Nome completo:', titular2.nome_completo())
+    conta2 = Conta('143-6', titular2, 900.00)
+
+    conta1.transfere_para(conta2)  # Transfere da conta1 para a onnta2
+
