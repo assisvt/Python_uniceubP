@@ -79,12 +79,12 @@ valor default (padrão) de 1000.00 reais para o parâmetro valor limite.
 22- Use sua criatividade, elabore o enunciado e implemente mais uma método
     funcional neste sistema.
 """
-class Titular(object):
+class Titular(object):     # class Titular:
     def __init__(self, cpf, nome, sobrenome):
         self.cpf = cpf
-        self.nome = nome
+        self.nome = nome   # Atributos de instância
         self.sobrenome = sobrenome
-    def get_cpf(self):
+    def get_cpf(self):     # Métodos gets e sets
         return self.cpf
     def get_nome(self):
         return self.nome
@@ -97,31 +97,61 @@ class Titular(object):
         # nome_c = f'{self.nome} {self.sobrenome}' # Usa f-string
         # As duas linhas acima são equivalentes
         return nome_c
+     
 class Conta(object): # class Conta:
-    def __init__(self, numero, obj_titular, saldo, limite=1000.0):
+    def __init__(self, numero, o_titular, saldo, limite=1000.0):
         self.numero = numero
-        self.titular = obj_titular
+        self.titular = o_titular #o_titular = objeto_titular
         # O atributo self.titular recebe o endereço objeto da classe Titular
         self.saldo = saldo
         self.limite = limite
     def get_saldo(self):
         return self.saldo
-    def set_saldo(self, novo_saldo):
-        self.saldo = novo_saldo
-    def get_titular(self):
+    def get_titular(self):       # Retorna o endereço do objeto titular
         return self.titular
-    def get_titular_nome(self):
-        return self.titular.get_nome()
+    def get_titular_nome(self):  # Retorna nome do titular
+        return self.titular.get_nome()   ### agregação
+    def set_titular_nome(self, novo_nome):  # Altera nome do titular
+        self.titular.set_nome(novo_nome)    # self.titular.nome = novo_nome  ###a agregação
+    def get_titular_sobrenome(self):        # Retorna sobrenome do titular
+        return self.titular.get_sobrenome()
+    def get_titular_cpf(self):              # Retorna cpf do titular
+        return self.titular.get_cpf()
     def extrato_reduzido(self):
         print(f"Extrato 1:\nNúmero: {self.numero}, Saldo: {self.saldo}")
     def extrato_normal(self):
         print(f'Extrato 2:\nNome: {self.titular.get_nome()}')
         f'{self.titular.get_sobrenome()} CPF: {self.titular.get_cpf()}'
         print(f"\nNúmero : {self.numero}, Saldo: {self.saldo}")
+    def dados_titular(self):
+        # return self.titular.__dict__      # Duas linhas equivalentes
+        return vars(self.titular)
     def deposito(self, valor):          # Métodos funcionais
         self.saldo += valor   
-    def saque(self, valor):          # Sem RN (Regra de Negócio)
-        self.saldo -= valor   
+    # def saque(self, valor):             # Sem crítica
+    #     self.saldo -= valor
+    def saque(self, valor):             # Com crítica (RN - Regra de Negócio)
+        if self.saldo + self.limite < valor:
+            print('Saldo insuficiente.')
+            return False
+        else:
+            self.saldo -= valor
+            print('Saque realizado.')
+            return True
+    # def transfere_para(self, destino):  # Sem crítica
+    #     valor = float(input("Valor da retirada"))
+    #     self.saldo -= valor
+    #     destino.saldo += valor
+    def transfere_para(self, destino):    # Com crítica (RN - Regra de Negócio)
+        valor = float(input("Valor da retirada: "))
+        retirou = self.saque(valor)
+        if not retirou:                   # if retirou == False:
+            print('Transferência não realizada')
+            return False
+        else:
+            destino.deposito(valor)
+            print('Transferência realizada com sucesso')
+            return True
 
 
 if __name__ == '__main__':  # Atalho: mai <tab>
