@@ -49,58 +49,59 @@ Na declaração dos parâmetros no construtor da classe Conta, atribua um
 valor default (padrão) de 1000.00 reais para o parâmetro valor limite.
 
 - Implemente:
- 1- Crie a classe Titular com os atributos cpf, nome, sobrenome
- 2- Crie alguns métodos gets e sets
- 3- Crie (instancie) um objeto da classe Titular
- 4- Crie o método funcional que retora o nome completo do titular, teste
- 5- Crie a classe Conta com os atributos numero, obj_titular, saldo, limite.
- 6- Crie alguns métodos gets e sets
- 7- Crie um objeto da classe Conta usando o objeto da classe Titular criado
- 8- No main, mostre o endereço do objeto titular criado
- 9- No main, mostre o endereço do objeto conta criado
-10- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Titular
-11- Altere o nome do objeto titular, teste.
-12- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Conta.
-13- Altere o nome do objeto titular usando o objeto da classe Conta, teste.
+  1- Crie a classe Titular com os atributos cpf, nome, sobrenome
+  2- Crie alguns métodos gets e sets
+  3- Crie (instancie) um objeto da classe Titular
+  4- Crie o método funcional que retora o nome completo do titular, teste
+  5- Crie a classe Conta com os atributos numero, obj_titular, saldo, limite.
+  6- Crie alguns métodos gets e sets
+  7- Crie um objeto da classe Conta usando o objeto da classe Titular criado
+  8- No main, mostre o endereço do objeto titular criado
+  9- No main, mostre o endereço do objeto conta criado
+ 10- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Titular
+ 11- Altere o nome do objeto titular, teste.
+ 12- No main, mostre o nome, sobrenome e cpf usando o objeto da classe Conta.
+ 13- Altere o nome do objeto titular usando o objeto da classe Conta, teste.
 
-14- Crie o método extrato reduzido para mostrar os seguintes dados:
+ 14- Crie o método extrato reduzido para mostrar os seguintes dados:
     número da conta e saldo da conta
-15- Crie o método extrato normal para mostrar os seguintes dados:
+ 15- Crie o método extrato normal para mostrar os seguintes dados:
     nome, sobrenome, cpf, número da conta e saldo da conta
-16- Na classe Conta, crie o método parar mostrar todos os dados do atributo
+ 16- Na classe Conta, crie o método parar mostrar todos os dados do atributo
     titular da classe Conta.
 
-17- Faça um depósito, teste.
-18- Faça um saque, teste.
-19- Refaça o método anterior com uma RN (regra de negócio) do banco,
+ 17- Faça um depósito, teste.
+ 18- Faça um saque, teste.
+ 19- Refaça o método anterior com uma RN (regra de negócio) do banco,
     ou seja, com crítica.
-20- Cadastre mais uma conta corrente, teste
-21- Faça uma transferência, teste.
+ 20- Cadastre mais uma conta corrente, teste
+ 21- Faça uma transferência, teste.
+
 22- Use sua criatividade, elabore o enunciado e implemente mais uma método
     funcional neste sistema.
 
 ---
 
-10- Na classe Conta, crie o método para consultar o nome do titular, teste
-11- Na classe Conta, crie o método para consultar o sobrenome do titular, teste
-12- Na classe Conta, crie o método para consultar o cpf do titular, teste
+ 10- Na classe Conta, crie o método para consultar o nome do titular, teste
+ 11- Na classe Conta, crie o método para consultar o sobrenome do titular, teste
+ 12- Na classe Conta, crie o método para consultar o cpf do titular, teste
 ---
 
 - Use o método __class__ no objeto titular
 - Use o método __class__.__name__ no objeto titular
 
-- Mostre os atributos do objeto titular com o método __dict__
-- Mostre os atributos do objeto titular com o método vars
+ - Mostre os atributos do objeto titular com o método __dict__
+ - Mostre os atributos do objeto titular com o método vars
 
 """
 
 
 class Titular(object):     # class Titular:
-    def __init__(self, cpf, nome, sobrenome):
+    def __init__(self, cpf, nome, sobrenome): ###1
         self.cpf = cpf
         self.nome = nome   # Atributos de instância
         self.sobrenome = sobrenome
-    def get_cpf(self):     # Métodos gets e sets
+    def get_cpf(self):     # Métodos gets e sets ###2
         return self.cpf
     def get_nome(self):
         return self.nome
@@ -108,21 +109,21 @@ class Titular(object):     # class Titular:
         self.nome = novo_nome
     def get_sobrenome(self):
         return self.sobrenome
-    def nome_completo(self): # Método fucional
+    def nome_completo(self): # Método fucional ##4
         nome_c = self.nome + " " + self.sobrenome # Usa concatenação de strings
         # nome_c = f'{self.nome} {self.sobrenome}' # Usa f-string
         # As duas linhas acima são equivalentes
         return nome_c
      
 
-class Conta(object): # class Conta:
+class Conta(object): # class Conta:  ###5
     def __init__(self, numero, o_titular, saldo, limite=1000.0):
         self.numero = numero
         self.titular = o_titular #o_titular = objeto_titular
         # O atributo self.titular recebe o endereço objeto da classe Titular
         self.saldo = saldo
         self.limite = limite
-    def get_saldo(self):
+    def get_saldo(self): ###6
         return self.saldo
     def get_titular(self):       # Retorna o endereço do objeto titular
         return self.titular
@@ -134,13 +135,13 @@ class Conta(object): # class Conta:
         return self.titular.get_sobrenome()
     def get_titular_cpf(self):              # Retorna cpf do titular
         return self.titular.get_cpf()
-    def extrato_reduzido(self):
-        print(f"Extrato 1:\nNúmero: {self.numero}, Saldo: {self.saldo}")
-    def extrato_normal(self):
-        print(f'Extrato 2:\nNome: {self.titular.get_nome()}')
-        f'{self.titular.get_sobrenome()} CPF: {self.titular.get_cpf()}'
-        print(f"\nNúmero : {self.numero}, Saldo: {self.saldo}")
-    def dados_titular(self):
+    def extrato_reduzido(self):  ###14
+        print(f"\nExtrato 1:\nNúmero: {self.numero}, Saldo: {self.saldo}")
+    def extrato_normal(self):  ###15
+        print(f'\nExtrato 2:\nNome: {self.titular.get_nome()}, ')
+        print(f'Sobrenome: {self.titular.get_sobrenome()}, CPF: {self.titular.get_cpf()}')
+        print(f"Número: {self.numero}, Saldo: {self.saldo};")
+    def dados_titular(self): ###16
         # return self.titular.__dict__      # Duas linhas equivalentes
         return vars(self.titular)
     def deposito(self, valor):          # Métodos funcionais
@@ -173,25 +174,31 @@ class Conta(object): # class Conta:
          
 
 if __name__ == '__main__':  # Atalho: mai <tab>    
-    titular1 = Titular('371-1', 'Lia', 'Oliveira')  # Objeto da classe Titular # 3
+    titular1 = Titular('678654789-01', 'Lia', 'Oliveira')  # Objeto da classe Titular ###3
     print('Nome:', titular1.get_nome())
     print('Nome completo:', titular1.nome_completo())
     # Cria objeto da classe Conta usando o objeto da classe Titular
-    conta1 = Conta('123-4', titular1, 1200.00, 2000.00)
-    print(titular1)  # <conta_agregacao.Titular object at 0x000002B9DBA4AFD0> #8
-    print(conta1)    # <conta_agregacao.Conta object at 0x000002B9DBA4AF70>  #9
+    conta1 = Conta('123-4', titular1, 1200.00, 2000.00) ###7
+    print(titular1)  # <conta_agregacao.Titular object at 0x000002B9DBA4AFD0> ###8
+    print(conta1)    # <conta_agregacao.Conta object at 0x000002B9DBA4AF70>  ###9
     print(conta1.get_titular())         # Retorna o endereço do objeto titular
     # <conta_agregacao.Titular object at 0x000002B9DBA4AFD0>, endereço do atributo
+
+    ###10
     print('Nome:', titular1.get_nome())  # Consulta usando a classe Titular
     print('Sobrenome:', titular1.get_sobrenome())
     print('CPF:', titular1.get_cpf())
-    titular1.set_nome('Ana')            # Altera o nome usando a classe Titular
+    
+    titular1.set_nome('Anna')   ###11         # Altera o nome usando a classe Titular
     print('Nome:', titular1.get_nome())
-    print('Nome completo:', titular1.nome_completo())
+    print('Nome completo:', titular1.nome_completo()) ###4
+
+    ###12
     print('Nome:', conta1.get_titular_nome())  # Consulta usando a classe Conta
     print('Sobrenome:', conta1.get_titular_sobrenome())
     print('CPF:', conta1.get_titular_cpf())
-    conta1.set_titular_nome('Alice')        # Altera o nome usando a classe Conta
+
+    conta1.set_titular_nome('Alice')   ###13     # Altera o nome usando a classe Conta
     print('Nome:', conta1.get_titular_nome())
     conta1.extrato_reduzido()
     conta1.extrato_normal()
@@ -201,11 +208,11 @@ if __name__ == '__main__':  # Atalho: mai <tab>
     print(conta1_titular.__dict__)
     print(vars(conta1_titular))
     print("----------------")
-    conta1.deposito(200)
-    conta1.saque(100)
-    titular2 = Titular('388-1', 'Paulo', 'Pereira')  # Objeto da classe Titular
+    conta1.deposito(200) ###17
+    conta1.saque(100) ####18
+    titular2 = Titular('977545689-07', 'Paulo', 'Pereira')  # Objeto da classe Titular
     print('Nome:', titular2.get_nome())
     print('Nome completo:', titular2.nome_completo())
     conta2 = Conta('143-6', titular2, 900.00)
 
-    conta1.transfere_para(conta2)  # Transfere da conta1 para a conta2
+    conta1.transfere_para(conta2)  # Transfere da conta1 para a conta2 ###21
