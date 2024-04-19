@@ -12,11 +12,11 @@ ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
 6- No item anterior, faça crítica no método set, teste
 7- Crie o método funcional aumento_preco com o objetivo de atualizar o preço do livro.
    Esse método recebe o valor do aumento e atualiza o atributo preco. Teste
- 8- Use (teste) todos os métodos criados na classe Livro para os objetos livro1 e livro2.
- 9- Crie o método mostra_dados, mostra todos os valores dos atributos
- 10- Crie o método funcional aumento_porcentagem para atualizar o preço
- 11- Crie o mètodo __str__
- 12- Elabore o enunciado de mais um método funcional importante para a classe
+8- Use (teste) todos os métodos criados na classe Livro para os objetos livro1 e livro2.
+9- Crie o método mostra_dados, mostra todos os valores dos atributos
+10- Crie o método funcional aumento_porcentagem para atualizar o preço
+11- Crie o mètodo __str__
+12- Elabore o enunciado de mais um método funcional importante para a classe
 
 - O sistema precisa informar quantos livros foram cadastrados.
 14- Crie o método de classe para recuperar essa informação
