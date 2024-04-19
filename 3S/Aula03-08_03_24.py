@@ -6,7 +6,7 @@ ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
 Teoria:
 - Uma classe abstrata deve herdar de ABC (Abstract Base Classes)
 - A superclasse abstrata FormaGeometrica com os métodos abstratos area e perímetro.
-- As subclasses concretas Circulo e Quadrado herdam da superclasse abstrataf
+- As subclasses concretas Circulo e Quadrado herdam da superclasse abstrata
   FormaGeometrica e tem que implementar todos os métodos abstratos da superclasse.
 
 - Analise o problema da figura geométrica e o cálculo da área e do perímetro.
