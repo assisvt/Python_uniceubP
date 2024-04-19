@@ -3,14 +3,14 @@
 ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
 
 - Implemente:
- 1- Crie a classe Livro com os atributos: título, autor, páginas e preço.
- 2- Crie o método construtor (init) que recebe quatro parâmetros e
+1- Crie a classe Livro com os atributos: título, autor, páginas e preço.
+2- Crie o método construtor (init) que recebe quatro parâmetros e
    use pelo menos um desses parâmetros com valor default (padrão) 
- 3- Crie o objeto livro1 passando os quatro argumentos, teste
- 4- Crie o objeto livro2 passando apenas três argumentos, teste
- 5- Crie pelo menos um método get e pelo menos um método set, teste
- 6- No item anterior, faça crítica no método set, teste
- 7- Crie o método funcional aumento_preco com o objetivo de atualizar o preço do livro.
+3- Crie o objeto livro1 passando os quatro argumentos, teste
+4- Crie o objeto livro2 passando apenas três argumentos, teste
+5- Crie pelo menos um método get e pelo menos um método set, teste
+6- No item anterior, faça crítica no método set, teste
+7- Crie o método funcional aumento_preco com o objetivo de atualizar o preço do livro.
    Esse método recebe o valor do aumento e atualiza o atributo preco. Teste
  8- Use (teste) todos os métodos criados na classe Livro para os objetos livro1 e livro2.
  9- Crie o método mostra_dados, mostra todos os valores dos atributos
@@ -35,30 +35,43 @@ class Livro(object):
       return cls.qtd_titulo
     
     def __init__(self, titulo, autor, paginas, preco=0.0):
-      self.titulo = titulo
+      self.titulo = titulo  # Atributos de instância
       self.autor = autor
       self.paginas = paginas
       self.preco = preco
+      Livro.qtd_titulo += 1  # Incrementando o contador de livros (Atento a letra maiuscula)
 
     def get_titulo(self):
       return self.titulo
-    
-    def get_preco(self):
-      return self.preco
-    
-    def set_titulo(self, novo_titulo):
+    def set_titulo(self, novo_titulo): # Com crítica
       if type(novo_titulo) == str:
             self.titulo = novo_titulo
       else:
           print('Erro: nome deve ser string.')
+      
+    def get_autor(self):
+        return self.autor
+    def set_autor(self, novo_autor):
+        self.autor = novo_autor
+        
+    def get_preco(self):
+      return self.preco
+    # def set_preco(self, novo_preco):
+    #    self.preco = novo_preco
+    def set_preco(self, novo_preco):    # Com crítica
+        if novo_preco > 0:
+            self.valor = novo_preco
+        else:
+            print("Erro: valor inconsistente, valor negativo.")  
+          
     def aumenta_preco(self, preco_aumento):
-      self.preco = self.preco + preco_aumento
+      self.preco = self.preco + preco_aumento # self.preco += aumento 
 
     def mostra_dados(self): # Mostra atributos
       print('- Título:', self.titulo)
       print('Autor:', self.autor)
       print('Páginas:', self.paginas)
-      print('Preço:', self.preco)
+      print('O Preço é:', self.preco)
     
     def aumento_pct(self, pct):
       self.preco = self.preco + self.preco * pct/100
@@ -69,7 +82,7 @@ class Livro(object):
         return s
     
 if __name__ == '__main__':
-  livro1 = Livro('Harry Potter', 'J.K. Rowling', 210, 41.42)
+  livro1 = Livro('Harry Potter', 'J.K. Rowling', 210, 41.05)
   print(livro1)
   livro2 = Livro('Torto Arad', 'Lygia Fagundes Telles', 190)
   print(livro2)
@@ -77,15 +90,19 @@ if __name__ == '__main__':
   print('Titulo:', retorno)
   livro1.set_titulo('Harry Potter e a Pedra filosofal')
   print('Novo título:', livro1.get_titulo())
-  livro1.set_titulo(8)
+  livro1.set_autor('J.K. Rowlling')
+  print('Nome autor:', livro1.get_autor)
   livro1.aumenta_preco(10)
   print('Novo preço Livro 1:', livro1.get_preco())
   livro2.set_titulo('Torto Arado')
   print('Novo título Livro 2:', livro2.get_titulo())
+  livro2.set_autor('Lygia F. Telles')
+  print('Nome do autor', livro2.get_autor)
   livro2.aumenta_preco(100)
   print('Novo preço livro 2:', livro2.get_preco())
-  livro1.mostra_dados()
   livro1.aumento_pct(10)
-  print('Preço:', livro1.get_preco())
-   
-    
+  print('Preçooo:', livro1.get_preco())
+  livro1.mostra_dados()
+  livro2.mostra_dados()
+  print(str(livro1))
+  print("Total de livros cadastrados:", Livro.get_qtd_titulo())
