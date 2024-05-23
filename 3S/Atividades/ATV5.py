@@ -58,16 +58,16 @@ def create_table():
     PRIMARY KEY (id),                       # Define a chave primária (1B)
     FOREIGN KEY(cod_categoria) REFERENCES tb_categoria(id)  # Define chave estrangeira (5B)
     )   """
-    cursor.execute(sql_marmita)     # Depois, crie a tabela tb_empregado
+    cursor.execute(sql_marmita)     
 
-def insert_categoria():                   # Solução 1
-    a_nome = input('Nome da categoria: ')  # Insere primeiro na tabela domínio
+def insert_categoria():                       # Solução 1
+    a_nome = input('Nome da categoria: ')     # Insere primeiro na tabela domínio
     sql = f"""  insert into tb_categoria (nome)
                 values('{a_nome}')              """
     cursor.execute(sql)
-    conexao.commit()                  # Confirma a alteração no database
+    conexao.commit()                          # Confirma a alteração no database
 
-def insert_marmita():                       # Solução 1
+def insert_marmita():                         # Solução 1
     a_nome = input('Nome Marmita: ')
     a_dt_validade = input("Data validade: aaaa-mm-dd: ")
     a_tamanho = input("Tamanho [G]; [M]; [P]: ")
@@ -75,7 +75,7 @@ def insert_marmita():                       # Solução 1
     sql= f"""insert into tb_marmita (nome, dt_validade, tamanho, cod_categoria)
      values('{a_nome}', '{a_dt_validade}', '{a_tamanho}', {a_cod_categoria}) """
     cursor.execute(sql)
-    conexao.commit()                # Confirma a alteração no database
+    conexao.commit()                           # Confirma a alteração no database
 
 def select_all_marmita():
     sql = ' select * from tb_marmita '
