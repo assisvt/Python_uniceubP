@@ -6,7 +6,7 @@ ctlr<d>, duplica linha. ctrl<y>, apaga linha. ctrl</>, comenta linha.
 
 - Vamos implementar a classe conta corrente.
 
-- Primeira ideia dos atributos da classe ccnta corrente:
+- Primeira ideia dos atributos da classe conta corrente:
 
 número da conta;
 nome do titular;
