@@ -95,14 +95,14 @@ class Professor(Pessoa):    # A subclasse Professor herda da superclasse Pessoa
             print("Erro (set_qtd_turma2): quantidade de turmas não pode ser negativo.")
         else:
             self.qtd_turma = nova_qtd_turma
-""" 
+ 
     def set_qtd_turma(self, nova_qtd_turma):    # Solução 3
         # if type(nova_qtd_turma) == int:
         if isinstance(nova_qtd_turma, int):
             self.qtd_turma = nova_qtd_turma
         else:
             print('Erro (set_qtd_turma3): tipo inválido.')
-"""
+
     def rendimentos(self):
         vl_rendimentos = self.qtd_turma * self.valor_turma
         return vl_rendimentos
