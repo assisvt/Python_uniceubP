@@ -72,7 +72,7 @@ def insert_empregado():                       # Solução 1
     sql= f"""insert into tb_empregado (nome, dta_nascimento, genero, cod_cargo)
      values('{a_nome}', '{a_dta_nascimento}', '{a_genero}', {a_cod_cargo}) """
     cursor.execute(sql)
-    conexao.commit()                # Confirma a alteração no database
+    conexao.commit()                # UPDATE/INSERT/DELETE Confirma a alteração no database
 
 def select_all_emp():
     sql = ' SELECT * from tb_empregado '
