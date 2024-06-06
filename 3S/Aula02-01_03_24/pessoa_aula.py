@@ -71,9 +71,9 @@ class Pessoa(object):                   # Superclasse (classe pai)
         return self.qtd_dependente
     # def set_qtd_dependente(self, qtd_dependente):
     #     self.qtd_dependente = qtd_dependente
-    def set_qtd_dependente(self, qtd_dependente):  # Com crítica
-        if type(qtd_dependente) == int:
-            self.qtd_dependente = qtd_dependente
+    def set_qtd_dependente(self, nv_qtd_dependente):  # Com crítica
+        if type(nv_qtd_dependente) == int:
+            self.qtd_dependente = nv_qtd_dependente
         else:
             print("Erro: tipo deve ser inteiro.")
     def valor_extra(self):
@@ -90,18 +90,12 @@ class Professor(Pessoa):    # A subclasse Professor herda da superclasse Pessoa
         return self.qtd_turma
     # def set_qtd_turma(self, nova_qtd_turma):  # Solução 1, sem crítica
     #     self.qtd_turma = nova_qtd_turma
-    def set_qtd_turmas(self, nova_qtd_turma):
-        if nova_qtd_turma <= 0:                 # Solução 2
-            print("Erro (set_qtd_turma2): quantidade de turmas não pode ser negativo.")
-        else:
-            self.qtd_turma = nova_qtd_turma
  
     def set_qtd_turma(self, nova_qtd_turma):    # Solução 3
-        # if type(nova_qtd_turma) == int:
-        if isinstance(nova_qtd_turma, int):
+        if type(nova_qtd_turma) == int:  #if isinstance(nova_qtd_turma, int):
             self.qtd_turma = nova_qtd_turma
         else:
-            print('Erro (set_qtd_turma3): tipo inválido.')
+            print('Erro! tipo (set_qtd_turma) deve ser int.')
 
     def rendimentos(self):
         vl_rendimentos = self.qtd_turma * self.valor_turma
@@ -126,10 +120,9 @@ class Professor(Pessoa):    # A subclasse Professor herda da superclasse Pessoa
         total = self.rendimentos() + self.valor_extra()
         return total
     def mostra_dados(self):
-        print(self.get_nome())
-        print(self.get_qtd_dependente())
-        print(self.get_qtd_turma())
-
+        print('Nome Professor: ', self.get_nome())
+        print('Qtd dependente Professor: ', self.get_qtd_dependente())
+        print('Qtd turma Professor: ', self.get_qtd_turma())
 
 class Funcionario(Pessoa):
     def __init__(self, nome='', qtd_dependente=0, salario=2000.00):
@@ -151,32 +144,29 @@ class Funcionario(Pessoa):
         total = self.salario + self.valor_extra()
         return total
     def mostra_dados(self):
-        print(self.get_nome())
-        print(self.get_qtd_dependente())
-        print(self.get_salario())
-
+        print('Nome Funcionário: ', self.get_nome())
+        print('Qtd dependente Funcionário: ', self.get_qtd_dependente())
+        print('Salário Funcionário', self.get_salario())
 
 if __name__ == '__main__':                  # Atalho: main <tab>
-    p = Pessoa('Alice', 0)
-    print(p)
+    p = Pessoa('Alice', 0)                  # Objeto p  <__main__.Pessoa object at 0x000001C68958F6D0
+    print('oiii p', p)
     p1 = Professor("Silvio Ferreira",1, 5)  # Cria objeto da classe Professor
     print('- Dados do professor ...')
-    print(p1)
+    print('oiii p1', p1)                    # Objeto p1 <__main__.Professor object at 0x0000027312490E90>
     print('Nome:', p1.get_nome())
+    p1.set_nome(34)                         # Argumento errado
     p1.set_nome('Bruno')
     print(f"Nome: {p1.get_nome()}")
-    p1.set_nome(34)                         # Argumento errado
-    print(f"Nome: {p1.get_nome()}", )
     p1.set_qtd_turma(6)
     print(f'Qtd turmas: {p1.get_qtd_turma()}')
     p1.set_qtd_turma('nome')                # Argumento errado
-    print(f'Qtd turmas: {p1.get_qtd_turma()}')
     p2 = Professor("Alice Dutra", 1)
     print(f"Nome: {p2.get_nome()}")
     p3 = Professor()
-    print(f"Nome: {p3.get_nome()} e qtd turmas: {p3.get_qtd_turma()}")
+    print(f"Nome: {p3.get_nome()} // Qtd turmas: {p3.get_qtd_turma()}")
     p4 = Professor("Alice Dutra", qtd_turma=4)
-    print(f"Nome: {p4.get_nome()} e qtd turmas: {p4.get_qtd_turma()}")
+    print(f"Nome: {p4.get_nome()} // Qtd turmas: {p4.get_qtd_turma()}")
     print("Rendimentos:", p1.rendimentos())
 
     print('- Dados do funcionário ...')
@@ -185,15 +175,16 @@ if __name__ == '__main__':                  # Atalho: main <tab>
     f2 = Funcionario("Vinícius", 2)
     print(f"Nome: {f2.get_nome()}")
     f3 = Funcionario()
-    print(f"Nome: {f2.get_nome()}")
+    print(f"Nome: {f3.get_nome()}")
     f1.set_salario(3000.0)
     print('Novo salário:', f1.get_salario())
     f1.set_salario('Nome')                  # Argumento errado
     print('Novo salário:', f1.get_salario())
-    print(f"Nome do Funcionario: {f1.get_nome()}\nSalário:{f1.get_salario()}")
-    f1.set_salario(3000)
-    print(f"Sálario após alterar: {f1.get_salario()}")
-    p1.rendimentos()
+    # print(f"Nome do Funcionario: {f1.get_nome()}\nSalário:{f1.get_salario()}")
+    print('----------------------------')
     p1.mostra_dados()
+    print('----------------------------')
     f1.mostra_dados()
-    print("Salário total:", p1.salario_total())
+    print('----------------------------')
+    # * print("Salário total:", p1.salario_total())
+    print("Salário total:", f1.salario_total())
