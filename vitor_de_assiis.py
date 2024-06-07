@@ -6,7 +6,7 @@ class FiguraGeometrica:
     def get_cor(self):
         return self.cor
     def contador(self):
-        print("Quantidade de objetos instanciados:", FiguraGeometrica.ct)
+        print("Qtd de objetos instanciados:", FiguraGeometrica.ct)
 
 class Retangulo(FiguraGeometrica):
     def __init__(self, cor, base=0, altura=0):
@@ -18,9 +18,9 @@ class Retangulo(FiguraGeometrica):
     def set_altura(self, nova_altura):
         self.altura = nova_altura
     def area(self):
-        areaobj = self.base * self.altura
-        print("Área do objeto:", areaobj)
-        return areaobj
+        area_obj = self.base * self.altura
+        print("Área do objeto:", area_obj)
+        return area_obj
     def mostra_dados(self):
         print("Cor:", self.cor)
         print("Base:", self.base)
@@ -32,7 +32,7 @@ class Circulo(FiguraGeometrica):
         self.raio = raio
     def set_raio(self, novo_raio):
         if novo_raio <= 0:
-            print("Não é possível calcular raio com 0 ou valores negativos")
+            print("Erro! incapaz de calcular raio com valore menores ou iguais a 0")
         else:
             self.raio = novo_raio
     def perimetro(self):
@@ -46,15 +46,15 @@ if __name__ == '__main__':
     f1.area()
     print("Base do Retângulo:", f1.get_base())
     print("Valores com nova altura:")
-    f1.set_altura(10)
+    f1.set_altura(8)
     f1.mostra_dados()
     f1.area()
     f1.contador()
 
-    f2 = Circulo("Verde")
+    f2 = Circulo("Azul")
     print("Cor do Circulo:", f2.get_cor())
 
-    f3 = Circulo("Azul", 3)
+    f3 = Circulo("Vermelho", 3)
     print("Perímetro do Círculo:", f3.perimetro())
     f3.set_raio(5)
     print("Perímetro do novo Círculo:", f3.perimetro())
@@ -65,52 +65,60 @@ if __name__ == '__main__':
 import mysql.connector
 
 def create_database():
-    conexao_db = mysql.connector.connect(user='root', password='ceub123456', host='127.0.0.1')
+    conexao_db = mysql.connector.connect(user='root', password='', host='127.0.0.1')
     print('Conexão db:', conexao_db)
     cursor_db = conexao_db.cursor()
-    sql = "CREATE DATABASE if not exists db_loja"
+    sql = "CREATE DATABASE if not exists dab_loja"
     cursor_db.execute(sql)
     cursor_db.close()
     conexao_db.close()
     print('\nConexão Fechada')
 
 def create_connection():
-    con = mysql.connector.connect(user='root', password='ceub123456', host='127.0.0.1', database='db_loja')
+    con = mysql.connector.connect(user='root', password='', host='127.0.0.1', database='dab_loja')
     print('Conexao:', con)
     return con
 
-def close_connection(cursor, conexao):
+def create_table():
+    sql = """CREATE TABLE if not exists tab_veiculos(
+    id INT NOT NULL AUTO_INCREMENT,
+    placa CHAR(7) NOT NULL UNIQUE,
+    nome VARCHAR(45) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    dt_lancamento DATE NULL, 
+    PRIMARY KEY (ID)
+    ) """
+    cursor.execute(sql)
+
+def insert_table():
+    a_placa = input("Digite a placa de 4 números: ")
+    a_nome = input("Digite o nome do veículo: ")
+    a_preco = float(input("Digite o preço do veículo: "))
+    a_data = input('Data. aaaa-mm-dd: ')
+    sql = f"""INSERT INTO tab_veiculos (placa, nome, preco, dt_lancamento)
+             VALUES ('{a_placa}','{a_nome}', {a_preco}, '{a_data}')
+             """
+    cursor.execute(sql)
+    conexao.commit()
+
+def select(): 
+    sql = """select * from tab_veiculos"""
+    cursor.execute(sql)
+    l_registros = cursor.fetchall()
+    print('-List of tuplas:')
+    print(l_registros)
+
+def close_connection():
     cursor.close()
     conexao.close()
     print('Conexao Fechada')
 
-def create_table(cursor):
-    sql = """CREATE TABLE if not exists tb_veiculos(
-    placa INT NOT NULL,
-    nome VARCHAR(45) NOT NULL,
-    preco DECIMAL(10, 2),
-    PRIMARY KEY (placa)
-    ) """
-    cursor.execute(sql)
-
-def insert_table(cursor, conexao):
-    placa = int(input("Digite a placa de 4 números: "))
-    nome = input("Digite o nome do veículo: ")
-    preco = float(input("Digite o preço do veículo: "))
-    sql = """INSERT INTO tb_veiculos (placa, nome, preco)
-             VALUES (%s, %s, %s)"""
-    cursor.execute(sql, (placa, nome, preco))
-    conexao.commit()
-
 if __name__ == "__main__":
-    try:
-        create_database()
-        conexao = create_connection()
-        cursor = conexao.cursor()
-        create_table(cursor)
-        insert_table(cursor, conexao)
-    except mysql.connector.Error as err:
-        print(f"Erro: {err}")
-    finally:
-        close_connection(cursor, conexao)
-        '''
+    create_database()
+    conexao = create_connection()
+    cursor = conexao.cursor()
+    create_table()
+    insert_table()
+    select()
+    close_connection()  
+    '''
