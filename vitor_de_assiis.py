@@ -86,7 +86,7 @@ def create_table():
     nome VARCHAR(45) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
     dt_lancamento DATE NULL, 
-    PRIMARY KEY (ID)
+    PRIMARY KEY (id)
     ) """
     cursor.execute(sql)
 
