@@ -61,7 +61,7 @@ if __name__ == '__main__':
     f3.contador()
 
 '''
-# pip install mysql-connector-python
+# >pip install mysql-connector-python
 import mysql.connector
 
 def create_database():
