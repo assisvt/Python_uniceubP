@@ -32,7 +32,7 @@ class Circulo(FiguraGeometrica):
         self.raio = raio
     def set_raio(self, novo_raio):
         if novo_raio <= 0:
-            print("Erro! incapaz de calcular raio com valore menores ou iguais a 0")
+            print("Erro! raio deve ser maior que 0")
         else:
             self.raio = novo_raio
     def perimetro(self):
